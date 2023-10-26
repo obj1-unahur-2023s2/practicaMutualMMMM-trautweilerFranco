@@ -1,0 +1,108 @@
+import Viajes.*
+
+describe "Test Playa parte 1"{
+	
+	const playa = new Playa(largo = 1000)
+	
+	test "la playa lleva 2 dias"{
+		assert.equals(2, playa.diasViajes())
+	}
+	test "la playa no implica esfuerzo"{
+		assert.notThat(playa.implicaEsfuerzo())
+	}
+	test"la playa broncea"{
+		assert.that(playa.broncearse())
+	}
+}
+
+describe "test Ciudad parte 1"{
+	
+	const excursion1 = new Excursion(atracciones = 4) 
+	const excursion2 = new Excursion(atracciones = 8)
+	
+	const tropical1 = new Tropical(atracciones = 4) 
+	const tropical2 = new Tropical(atracciones = 8)
+	const tropical3 = new Tropical(atracciones = 10)
+	
+	test "la excursion1 lleva 2 dias"{
+		assert.equals(2, excursion1.diasViajes())
+	}
+	test "la playa no implica esfuerzo"{
+		assert.notThat(excursion1.implicaEsfuerzo())
+	}
+	test"la playa broncea"{
+		assert.notThat(excursion1.broncearse())
+	}
+	
+	test "la tropical1 lleva 3 dias"{
+		assert.equals(3, tropical1.diasViajes())
+	}
+	test "la tropical1 no implica esfuerzo"{
+		assert.notThat(tropical1.implicaEsfuerzo())
+	}
+	test"la tropical1 broncea"{
+		assert.that(tropical1.broncearse())
+	}
+	test "la excursion2 lleva 4 dias"{
+		assert.equals(4, excursion2.diasViajes())
+	}
+	test "la excursion2 implica esfuerzo"{
+		assert.that(excursion2.implicaEsfuerzo())
+	}
+	test"la excursion2 no broncea"{
+		assert.notThat(excursion2.broncearse())
+	}	
+	test "la tropical2 lleva 5 dias"{
+		assert.equals(5, tropical2.diasViajes())
+	}
+	test "la tropical2 implica esfuerzo"{
+		assert.that(tropical2.implicaEsfuerzo())
+	}
+	test"la tropical2 no broncea"{
+		assert.that(tropical2.broncearse())
+	}
+	test "la tropical3 lleva 6 dias"{
+		assert.equals(6, tropical3.diasViajes())
+	}
+	test "la tropical3 implica esfuerzo"{
+		assert.notThat(tropical3.implicaEsfuerzo())
+	}
+	test"la tropical3 no broncea"{
+		assert.that(tropical3.broncearse())
+	}	
+}
+
+describe "test trekkin parte 1"{
+	const trekking1 = new Trekking(kilometros = 100, diasSol = 130)
+	const trekking2 = new Trekking(kilometros = 50, diasSol = 240)
+	const trekking3 = new Trekking(kilometros = 250, diasSol = 130)
+	
+	test "la trekking1 lleva 2 dias"{
+		assert.equals(2, trekking1.diasViajes())
+	}
+	test "la trekking1  implica esfuerzo"{
+		assert.that(trekking1.implicaEsfuerzo())
+	}
+	test"la trekking1 no broncea"{
+		assert.notThat(trekking1.broncearse())
+	}
+	test "la trekking2 lleva 1 dias"{
+		assert.equals(1, trekking2.diasViajes())
+	}
+	test "la trekking2  implica esfuerzo"{
+		assert.notThat(trekking2.implicaEsfuerzo())
+	}
+	test"la trekking2 no broncea"{
+		assert.that(trekking2.broncearse())
+	}
+	test "la trekking3 lleva 1 dias"{
+		assert.equals(5, trekking3.diasViajes())
+	}
+	test "la trekking3  implica esfuerzo"{
+		assert.that(trekking3.implicaEsfuerzo())
+	}
+	test"la trekking3 no broncea"{
+		assert.that(trekking3.broncearse())
+	}	
+}
+
