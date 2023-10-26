@@ -1,8 +1,10 @@
 
-class Viajes {
-	const idiomas = #{}
+class Actividades {
+	const idiomasAct = #{}
 	
-	method agregarIdioma(unIdioma) = idiomas.add(unIdioma)
+	method idiomas() = idiomasAct
+	
+	method agregarIdioma(unIdioma) = idiomasAct.add(unIdioma)
 	
 	method diasViajes()
 	method implicaEsfuerzo()
@@ -11,7 +13,7 @@ class Viajes {
 	
 }
 
-class Playa inherits Viajes{
+class Playa inherits Actividades{
 	
 	const largo
 	
@@ -21,10 +23,10 @@ class Playa inherits Viajes{
 	
 	override method broncearse() = true
 	
-	override method esInteresante() = idiomas.size() > 1
+	override method esInteresante() = idiomasAct.size() > 1
 }
 
-class Excursion inherits Viajes{
+class Excursion inherits Actividades{
 	
 	const  atracciones
 	
@@ -43,10 +45,10 @@ class Tropical inherits Excursion {
 	
 	override method broncearse() = true
 	
-	override method esInteresante() = idiomas.size() > 1
+	override method esInteresante() = idiomasAct.size() > 1
 }
 
-class Trekking inherits Viajes{
+class Trekking inherits Actividades{
 	
 	const  kilometros
 	const  diasSol
@@ -60,11 +62,12 @@ class Trekking inherits Viajes{
 	override method esInteresante() = super() and diasSol > 140
 }
 
-class Gimnasia inherits Viajes{
-	override method agregarIdioma(unIdioma) = idiomas.add("español")	
+class Gimnasia inherits Actividades{
+	override method agregarIdioma(unIdioma) = idiomasAct.add("espaniol")	
 	override method diasViajes() = 1
 	override method implicaEsfuerzo() = true
 	override method broncearse() = false
+	override method esInteresante(){}
 }
 
 

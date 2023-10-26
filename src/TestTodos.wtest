@@ -1,4 +1,5 @@
 import Viajes.*
+import Socios.*
 
 describe "Test Playa parte 1"{
 	
@@ -105,4 +106,68 @@ describe "test trekkin parte 1"{
 		assert.that(trekking3.broncearse())
 	}	
 }
+
+describe "test Roque"{
+	
+	const roque = new Socios (maximoDeActividades = 2, edad = 1)
+	const playa1 = new Playa(largo = 1000)
+	const playa2 = new Playa(largo = 2000)
+	
+	method initialize(){
+		roque.agregarActividades(playa1)
+		roque.agregarActividades(playa2)
+	}
+	test "roque es adorador del sol"{
+		assert.that(roque.esAdoradorDelSol())
+	}
+	test"roque tiene una actividad forzada"{
+		assert.equals([playa2], roque.esforzado())
+	}
+	test "roque no puede hacer mas actividades"{
+		const gimnasia = new Gimnasia()
+		assert.throwsException({roque.realizarActividad(gimnasia)})
+	}
+}
+
+describe "test Ana"{
+	
+	const ana = new Socios(maximoDeActividades = 3, edad = 55)
+	const playa1 = new Playa(largo = 1000)
+	const playa2 = new Playa(largo = 2000)
+	const gimnasia = new Gimnasia()
+	
+	method initialize(){
+		ana.agregarActividades(playa1)
+		ana.agregarActividades(playa2)
+		ana.agregarActividades(gimnasia)
+	}
+	test"ana no es adoradora del sol"{
+		assert.notThat(ana.esAdoradorDelSol())
+	}
+	test"ana tiene dos actividad forzada"{
+		assert.equals([playa2,gimnasia], ana.esforzado())
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
