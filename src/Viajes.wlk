@@ -1,16 +1,13 @@
 
 class Actividades {
-	const idiomasAct = #{}
-	
-	method idiomas() = idiomasAct
-	
-	method agregarIdioma(unIdioma) = idiomasAct.add(unIdioma)
+	const property idiomas = new Set()
 	
 	method diasViajes()
 	method implicaEsfuerzo()
 	method broncearse()
 	method esInteresante()
-	
+	method esRecomendadaParaSocio(unSocio) = self.esInteresante() and unSocio.leAtraeActividad(self) and not unSocio.actividades().contains(self)
+	method cantDiasDeActividad() = pandemia.diasDeCuarentena()
 }
 
 class Playa inherits Actividades{
@@ -23,7 +20,7 @@ class Playa inherits Actividades{
 	
 	override method broncearse() = true
 	
-	override method esInteresante() = idiomasAct.size() > 1
+	override method esInteresante() = idiomas.size() > 1
 }
 
 class Excursion inherits Actividades{
@@ -45,7 +42,7 @@ class Tropical inherits Excursion {
 	
 	override method broncearse() = true
 	
-	override method esInteresante() = idiomasAct.size() > 1
+	override method esInteresante() = idiomas.size() > 1
 }
 
 class Trekking inherits Actividades{
@@ -62,12 +59,43 @@ class Trekking inherits Actividades{
 	override method esInteresante() = super() and diasSol > 140
 }
 
-class Gimnasia inherits Actividades{
-	override method agregarIdioma(unIdioma) = idiomasAct.add("espaniol")	
-	override method diasViajes() = 1
-	override method implicaEsfuerzo() = true
-	override method broncearse() = false
-	override method esInteresante(){}
+class Gimnasia {
+
+    method idiomas() = #{"español"}
+    method implicaEsfuerzo() = true
+    method sirveParaBroncear() = false
+    method cantDiasDeActividad() = 1
+    method esRecomendadaParaSocio(unSocio) = unSocio.edad().between(20,30)
+}
+
+class TallerLiterario{
+    const librosEnQueTrabaja = #{}
+
+	method idiomas() = librosEnQueTrabaja.map({l => l.idioma()}).asSet()
+    method cantDiasDeActividad() = librosEnQueTrabaja.size() + 1
+    method tieneLibroConMasDe500Pag() = librosEnQueTrabaja.any({l => l.cantPaginas() > 500})
+    method autoresDeLibros() = librosEnQueTrabaja.map({l => l.nombreDelAutor()}).asSet()
+    method todosLosLibrosSonDelMismoAutor() = self.autoresDeLibros().size() == 1
+    method hayMasDeUnLibro() = librosEnQueTrabaja.size() > 1
+    method implicaEsfuerzo() = self.tieneLibroConMasDe500Pag() or (self.todosLosLibrosSonDelMismoAutor() and self.hayMasDeUnLibro())
+    method sirveParaBroncear() = false
+    method esRecomendadaParaSocio(unSocio) = unSocio.idiomas().size() > 1
+}
+
+class Libro{
+    const property idioma
+    const property cantPaginas
+    const property nombreDelAutor
+}
+
+// para terminar de comprender en que casos usamos un objeto que puede modificar 
+// comportamiento o mensajes de todas las instancias de una clase, suponemos que al modelo de Viajes
+// se agrega una complejidad más que hace que a todos los tipos de viaje se le sume una cantidad de días
+// configurable cuando se declara pandemia, como dias de cuarentena. Este valor debe afectar a todos los viajes
+// por igual y es configurable para una pandemia.
+
+object pandemia {
+	var property diasDeCuarentena = 0
 }
 
 

@@ -1,9 +1,9 @@
 import Viajes.*
 class Socios {
 	
-	const actividades = []
-	const idiomas = #{}
-	const property maximoDeActividades
+	const property actividades = #{}
+	const property idiomas = #{}
+	const  maximoDeActividades
 	const property edad
 	
 	method agregarActividades(unaActividad) = actividades.add(unaActividad)
@@ -19,15 +19,19 @@ class Socios {
 			self.error("el socio alcanzo el maximo de actividades")
 		}
 	}
-	method esTranquilo() = actividades.any({ p => p.diasViajes() > 4})
-	
-	method esCoherente(){
-		return if(self.esAdoradorDelSol()){
-			actividades.all({p => p.broncearse()})
-		} else {
-			actividades.all({p => p.implicaEsfuerzo()})
-		}
-	}
-	method esRelajado() = idiomas.intersection(actividades.idiomas()).size()>=1
-	
 }
+class SocioTranquilo inherits Socios{
+
+    method leAtraeActividad(unaActividad) = unaActividad.cantDiasDeActividad() >= 4
+}
+
+class SocioCoherente inherits Socios{
+
+    method leAtraeActividad(unaActividad) = (self.esAdoradorDelSol() and unaActividad.broncearse()) or unaActividad.implicaEsfuerzo()
+}
+
+class SocioRelajado inherits Socios{
+
+    method leAtraeActividad(unaActividad) = not idiomas.intersection(unaActividad.idiomas()).isEmpty()
+}
+	
